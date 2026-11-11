@@ -38,11 +38,24 @@ See the [Devpost submission draft](documentation/DEVPOST_SUBMISSION.md) and [jud
 
 Requirements: Python 3.10+, Node.js 20+, npm.
 
-### 1. Configure the backend
+### 1. Clone the repository
 
-From the project root, copy `.env.example` to `.env`. For Demo mode, leave PayPal credentials empty. To enable model-backed tool calling, create a free Gemini API key in [Google AI Studio](https://aistudio.google.com/apikey) and set `LLM_API_KEY` in `.env`. `LLM_PROVIDER=google` and `LLM_MODEL=gemini-3.8-flash` are already set in the example. The model key is read by the backend only. Google's Gemini free tier may use submitted prompts to improve its products; PayPilot sends the customer/payment context needed for answers. Use the labeled demo records when trying this provider.
+```powershell
+git clone https://github.com/tharun4340-creator/PayPilot-AI.git
+cd PayPilot-AI
+```
+
+### 2. Configure the backend
+
+From the project root, create `.env` from the example. For Demo mode, leave PayPal credentials empty. To enable model-backed tool calling, create a free Gemini API key in [Google AI Studio](https://aistudio.google.com/apikey) and set `LLM_API_KEY` in `.env`. `LLM_PROVIDER=google` and `LLM_MODEL=gemini-3.8-flash` are already set in the example. The model key is read by the backend only. Google's Gemini free tier may use submitted prompts to improve its products; PayPilot sends the customer/payment context needed for answers. Use the labeled demo records when trying this provider.
+
+```powershell
+Copy-Item .env.example .env
+```
 
 To exercise PayPal end to end, create a PayPal Sandbox app and set its Client ID and Secret in the same `.env` file. Keep `PAYPAL_ENV=sandbox`.
+
+### 3. Start the backend
 
 ```powershell
 cd backend
@@ -54,7 +67,7 @@ uvicorn app.main:app --reload --port 8000
 
 The API health endpoint is http://localhost:8000/health and interactive API docs are at http://localhost:8000/docs.
 
-### 2. Start the frontend
+### 4. Start the frontend
 
 In a second terminal:
 
